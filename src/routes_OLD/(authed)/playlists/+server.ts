@@ -54,5 +54,5 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 
 
   Playlist.populate(data.body.id, (followedArtists ?? []).concat(artists), spotify)
-  throw redirect(303, '/playlists')
+  redirect(303, '/playlists');
 }

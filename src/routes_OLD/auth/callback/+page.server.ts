@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({ locals, url, cookies }) => {
   const authorizationCode = url.searchParams.get('code')
 
   if (!authorizationCode)
-    throw redirect(303, '/')
+    redirect(303, '/');
 
   // User is logging in
   spotify.setClientId(SPOTIFY_CLIENT_ID)
@@ -18,5 +18,5 @@ export const load: PageServerLoad = async ({ locals, url, cookies }) => {
 
   const { body: tokens } = await spotify.authorizationCodeGrant(authorizationCode)
   await Tokens.save(tokens.access_token, tokens.refresh_token, cookies)
-  throw redirect(303, '/')
+  redirect(303, '/');
 }

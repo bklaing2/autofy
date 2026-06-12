@@ -6,6 +6,6 @@ import { redirect } from '@sveltejs/kit'
 export const actions = {
   default: async ({ cookies }) => {
     Tokens.clear(cookies)
-    throw redirect(303, '/')
+    redirect(303, '/');
   }
 } satisfies Actions

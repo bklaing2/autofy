@@ -19,6 +19,6 @@ export const actions = {
     spotify.setRedirectURI(SPOTIFY_REDIRECT_URI)
 
     const authorizeUrl = spotify.createAuthorizeURL(SCOPES, 'login')
-    throw redirect(303, authorizeUrl)
+    redirect(303, authorizeUrl);
   }
 } satisfies Actions

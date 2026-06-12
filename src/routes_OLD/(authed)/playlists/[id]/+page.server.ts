@@ -15,7 +15,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
     .where(eq(playlistsTable.id, playlistId))
     .limit(1)
 
-  if (!dbPlaylist) throw error(404, { message: 'Playlist not found' })
+  if (!dbPlaylist) error(404, { message: 'Playlist not found' });
 
   const { body: spotifyPlaylist } = await spotify.getPlaylist(playlistId)
 
@@ -35,6 +35,6 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 export const actions = {
   update: async ({ params, request, fetch }) => {
     await fetch(`/playlists/${params.id}`, { method: 'PATCH', body: await request.formData() })
-    throw redirect(303, '/playlists')
+    redirect(303, '/playlists');
   }
 } satisfies Actions

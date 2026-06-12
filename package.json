@@ -14,9 +14,9 @@
     "@fontsource/fira-mono": "^4.5.10",
     "@iconify/json": "^2.2.149",
     "@neoconfetti/svelte": "^1.0.0",
-    "@sveltejs/adapter-auto": "^2.0.0",
+    "@sveltejs/adapter-auto": "^3.0.0",
     "@sveltejs/adapter-static": "^3.0.10",
-    "@sveltejs/kit": "^1.30.4",
+    "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.1",
     "@types/cookie": "^0.5.1",
     "@types/spotify-web-api-node": "^5.0.11",
@@ -33,7 +33,7 @@
     "typescript": "^5.0.0",
     "unplugin-icons": "^0.17.4",
     "vercel": "^34.2.8",
-    "vite": "^4.4.2"
+    "vite": "^5.0.0"
   },
   "type": "module",
   "dependencies": {
