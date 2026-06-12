@@ -1,5 +1,4 @@
 import type { Handle } from '@sveltejs/kit'
-import db from '$lib/server/db'
 import Spotify from '$lib/server/spotify'
 import Tokens from '$lib/server/tokens'
 
@@ -14,7 +13,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
   await Tokens.save(spotify.getAccessToken(), spotify.getRefreshToken(), cookies)
 
-  event.locals = { db, spotify, signedIn }
+  event.locals = { spotify, signedIn }
 
   return resolve(event, {
     filterSerializedResponseHeaders(name) { return name === 'content-range' }

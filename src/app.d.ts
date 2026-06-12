@@ -1,5 +1,4 @@
 import 'unplugin-icons/types/svelte'
-import type { Database } from '$lib/server/db';
 import type SpotifyWebApi from 'spotify-web-api-node'
 
 // See https://kit.svelte.dev/docs/types#app
@@ -8,7 +7,6 @@ declare global {
   namespace App {
     // interface Error {}
     interface Locals {
-      db: Database;
       spotify: SpotifyWebApi;
       signedIn?: boolean;
     }
