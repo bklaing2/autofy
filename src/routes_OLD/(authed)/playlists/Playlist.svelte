@@ -1,6 +1,11 @@
 <script lang="ts">
-  export let id: string
-  export let flipped = false
+  interface Props {
+    id: string;
+    flipped?: boolean;
+    children?: import('svelte').Snippet;
+  }
+
+  let { id, flipped = false, children }: Props = $props();
 </script>
 
 <div class="playlist" class:flipped>
@@ -11,13 +16,13 @@
       height="100%"
       frameBorder="0"
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy" />
+      loading="lazy"></iframe>
     
     {#if !flipped} <a class="flip hidden" href={`/playlists/${id}`} data-sveltekit-noscroll>⚙&#xFE0E;</a> {/if}
   </div>
   
   <div class="settings face">
-    <slot />
+    {@render children?.()}
     <a class="flip" href="/playlists" data-sveltekit-noscroll>↩&#xFE0E;</a>
   </div>
 </div>

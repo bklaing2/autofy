@@ -1,19 +1,35 @@
 <script lang="ts">
-  export let label: string
-  export let name: string
-  export let value: string
+	import { createBubbler } from 'svelte/legacy';
 
-  export let checked: boolean | undefined = undefined
+	const bubble = createBubbler();
 
-	export let disabled = false
-  export let hidden = false
+
 	
-	export let size = '1rem'
-	export let grid = false
+	interface Props {
+		label: string;
+		name: string;
+		value: string;
+		checked?: boolean | undefined;
+		disabled?: boolean;
+		hidden?: boolean;
+		size?: string;
+		grid?: boolean;
+	}
+
+	let {
+		label,
+		name,
+		value,
+		checked = $bindable(undefined),
+		disabled = false,
+		hidden = false,
+		size = '1rem',
+		grid = false
+	}: Props = $props();
 </script>
 
 
-<input {name} id={value} {value} type='checkbox' bind:checked={checked} on:change {disabled} />
+<input {name} id={value} {value} type='checkbox' bind:checked={checked} onchange={bubble('change')} {disabled} />
 <label for={value} class:grid class:hidden style:font-size={size} class:disabled>{label}</label>
 
 

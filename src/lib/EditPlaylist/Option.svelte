@@ -1,9 +1,19 @@
 <script lang="ts">
-  export let label: string
-	export let name: string
-  export let value: string
-	export let checked: boolean
-	export let disabled = false
+	interface Props {
+		label: string;
+		name: string;
+		value: string;
+		checked: boolean;
+		disabled?: boolean;
+	}
+
+	let {
+		label,
+		name,
+		value,
+		checked = $bindable(),
+		disabled = false
+	}: Props = $props();
 </script>
 
 

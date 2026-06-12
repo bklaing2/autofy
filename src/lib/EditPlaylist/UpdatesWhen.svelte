@@ -1,11 +1,20 @@
 <script lang="ts">
 	import Option from "./Option.svelte";
 
-  export let artistPosts: boolean
-  export let userFollowsArtist: boolean
-  export let userUnfollowsArtist: boolean
 
-	export let followedArtists: boolean
+	interface Props {
+		artistPosts: boolean;
+		userFollowsArtist: boolean;
+		userUnfollowsArtist: boolean;
+		followedArtists: boolean;
+	}
+
+	let {
+		artistPosts = $bindable(),
+		userFollowsArtist = $bindable(),
+		userUnfollowsArtist = $bindable(),
+		followedArtists
+	}: Props = $props();
 </script>
 
 

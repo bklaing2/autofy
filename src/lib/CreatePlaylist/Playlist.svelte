@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	interface Playlist {
 		id: string;
 		title: string;
@@ -15,10 +15,18 @@
 	import Option from './Option.svelte';
 	import Artists, { type Artist } from './Artists.svelte';
 
-  export let action: string
-  export let method = 'post'
 	
-	export let playlist: Playlist = {
+	interface Props {
+		action: string;
+		method?: string;
+		playlist?: Playlist;
+		color?: string;
+	}
+
+	let {
+		action,
+		method = 'post',
+		playlist = $bindable({
 		id: '',
 		title: '',
 		artists: [],
@@ -26,11 +34,12 @@
 		update_when_artist_posts: true,
 		update_when_user_follows_artist: true,
 		update_when_user_unfollows_artist: true
-	}
-	export let color = 'gray'
+	}),
+		color = 'gray'
+	}: Props = $props();
 
-	let artists: Artist[] = []
-	let followedArtists: boolean
+	let artists: Artist[] = $state([])
+	let followedArtists: boolean = $state()
 </script>
 
 

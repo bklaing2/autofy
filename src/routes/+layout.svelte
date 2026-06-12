@@ -4,7 +4,7 @@
 	import './styles.css';
 	import { onMount } from 'svelte';
 
-	export let data;
+	let { data, children } = $props();
 
 	onMount(() => {
 		const { hash } = document.location;
@@ -20,7 +20,7 @@
 
 <div class="layout">
 	<Header user={data.user} />
-	<slot />
+	{@render children?.()}
 	<Footer signedIn={!!data.user} />
 </div>
 

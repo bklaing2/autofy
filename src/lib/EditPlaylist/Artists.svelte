@@ -3,10 +3,14 @@
 	import ArtistModal from '$lib/SearchArtists.svelte';
 	import Option from './Option.svelte';
 
-	export let followed = false;
-	export let artists: Artist[];
+	interface Props {
+		followed?: boolean;
+		artists: Artist[];
+	}
 
-	let addArtist: ArtistModal;
+	let { followed = $bindable(false), artists = $bindable() }: Props = $props();
+
+	let addArtist: ArtistModal = $state();
 
 	function artistSelected(a: SpotifyApi.ArtistObjectFull) {
 		const artist: Artist = {
@@ -40,10 +44,10 @@
 		{/if}
 		<input id={artist.id} name="artist" value={artist.id} type="hidden" />
 		<span class="name">{artist.name}</span>
-		<button class="delete" type="button" on:click={() => removeArtist(artist.id)}>🗑</button>
+		<button class="delete" type="button" onclick={() => removeArtist(artist.id)}>🗑</button>
 	{/each}
 
-	<button class="add" on:click={addArtist.show} type="button">+ add artist</button>
+	<button class="add" onclick={addArtist.show} type="button">+ add artist</button>
 </section>
 
 <ArtistModal bind:this={addArtist} on:artistSelected={(e) => artistSelected(e.detail.artist)} />

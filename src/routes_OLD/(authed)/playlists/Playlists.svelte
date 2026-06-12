@@ -1,7 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Playlist from "./Playlist.svelte"
-	export let playlists: string[]
+	interface Props {
+		playlists: string[];
+		children?: import('svelte').Snippet;
+	}
+
+	let { playlists, children }: Props = $props();
 </script>
 
 <svelte:head>
@@ -14,7 +19,7 @@
 
 	{#each playlists as playlist}
 		<Playlist id={playlist} flipped={$page.params.id === playlist}>
-			{#if $page.params.id === playlist} <slot /> {/if}
+			{#if $page.params.id === playlist} {@render children?.()} {/if}
 		</Playlist>
 	{/each}
 

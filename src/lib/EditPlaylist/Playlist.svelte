@@ -3,7 +3,11 @@
 	import UpdatesWhen from './UpdatesWhen.svelte';
 	import Artists from './Artists.svelte';
 
-	export let playlist: Playlist = {
+	interface Props {
+		playlist?: Playlist;
+	}
+
+	let { playlist = $bindable({
 		id: '',
 		title: '',
 		artists: [],
@@ -11,7 +15,7 @@
 		updateWhenArtistPosts: true,
 		updateWhenUserFollowsArtist: true,
 		updateWhenUserUnfollowsArtist: true
-	};
+	}) }: Props = $props();
 </script>
 
 <form action={`/playlists/${playlist.id}?/update`} method="post">

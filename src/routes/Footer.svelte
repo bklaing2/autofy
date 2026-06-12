@@ -1,6 +1,10 @@
 <script lang="ts">
 	import GithubLogo from 'virtual:icons/logos/github-icon';
-	export let signedIn: boolean;
+	interface Props {
+		signedIn: boolean;
+	}
+
+	let { signedIn }: Props = $props();
 </script>
 
 <footer>

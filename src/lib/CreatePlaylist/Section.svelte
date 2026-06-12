@@ -1,16 +1,28 @@
 <script lang="ts">
-  export let label: string
-  export let hidden = false
-  export let className = ''
-	export let color = 'gray'
-  export let grid = false
+	interface Props {
+		label: string;
+		hidden?: boolean;
+		className?: string;
+		color?: string;
+		grid?: boolean;
+		children?: import('svelte').Snippet;
+	}
+
+	let {
+		label,
+		hidden = false,
+		className = '',
+		color = 'gray',
+		grid = false,
+		children
+	}: Props = $props();
 </script>
 
 
 
 <section class={className} class:grid class:hidden>
   <h2 class="label" style:color>{label}</h2>
-  <slot />
+  {@render children?.()}
 </section>
 
 

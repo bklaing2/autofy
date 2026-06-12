@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	export type Artist = { id: string; href: string; name: string; img?: string };
 </script>
 
@@ -7,13 +7,22 @@
 	import ArtistModal from '$lib/SearchArtists.svelte';
 	import Option from './Option.svelte';
 
-	export let artists: Artist[];
-	export let hidden = false;
-	export let color = 'gray';
 
-	export let followedArtists = false;
+	interface Props {
+		artists: Artist[];
+		hidden?: boolean;
+		color?: string;
+		followedArtists?: boolean;
+	}
 
-	let addArtist: ArtistModal;
+	let {
+		artists = $bindable(),
+		hidden = false,
+		color = 'gray',
+		followedArtists = $bindable(false)
+	}: Props = $props();
+
+	let addArtist: ArtistModal = $state();
 
 	function artistSelected(a: SpotifyApi.ArtistObjectFull) {
 		const artist: Artist = {
@@ -48,10 +57,10 @@
 		{/if}
 		<input type="checkbox" name="artist" id={artist.id} value={artist.id} checked />
 		<label for={artist.id}>{artist.name}</label>
-		<button class="delete" type="button" on:click={() => removeArtist(artist.id)}>🗑</button>
+		<button class="delete" type="button" onclick={() => removeArtist(artist.id)}>🗑</button>
 	{/each}
 
-	<button class="add" on:click={addArtist.show} type="button">+ add artist</button>
+	<button class="add" onclick={addArtist.show} type="button">+ add artist</button>
 </Section>
 
 <ArtistModal bind:this={addArtist} on:artistSelected={(e) => artistSelected(e.detail.artist)} />

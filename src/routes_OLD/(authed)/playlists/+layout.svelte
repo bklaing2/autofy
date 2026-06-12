@@ -1,6 +1,6 @@
-<script labg="ts">
+<script lang="ts" labg="ts">
 	import Playlists from './Playlists.svelte';
-	export let data;
+	let { data, children } = $props();
 	let playlists = data.playlists ?? [];
 </script>
 
@@ -19,6 +19,6 @@
 </svelte:head>
 
 <Playlists {playlists}>
-	<slot />
+	{@render children?.()}
 </Playlists>
 

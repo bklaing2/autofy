@@ -4,10 +4,10 @@
   const dispatch = createEventDispatcher();
   
 
-  let dialog: HTMLDialogElement
-  let shown = false
-  let query = ''
-  let artists: SpotifyApi.ArtistObjectFull[] = []
+  let dialog: HTMLDialogElement = $state()
+  let shown = $state(false)
+  let query = $state('')
+  let artists: SpotifyApi.ArtistObjectFull[] = $state([])
 
 
   export function show () {
@@ -44,15 +44,15 @@
   }
 </script>
 
-<dialog bind:this={dialog} on:close={onClose} on:click={() => dialog.close()} role="none" class:shown>
-  <div class="layout" on:click={e => e.stopPropagation()} role="none">
+<dialog bind:this={dialog} onclose={onClose} onclick={() => dialog.close()} role="none" class:shown>
+  <div class="layout" onclick={e => e.stopPropagation()} role="none">
     <search class="ignore">
-      <input type="search" id="artist" placeholder="search..." bind:value={query} on:keydown={handleKeydown} />
-      <button class="search" type="button" on:click={search}>search</button>
+      <input type="search" id="artist" placeholder="search..." bind:value={query} onkeydown={handleKeydown} />
+      <button class="search" type="button" onclick={search}>search</button>
     </search>
 
     {#each artists as artist (artist.id)}
-      <button class="artist" type="button" on:click={() => dispatch('artistSelected', { artist: artist })}>
+      <button class="artist" type="button" onclick={() => dispatch('artistSelected', { artist: artist })}>
         {#if artist.images && artist.images.length > 0} <img src={artist.images[0].url} alt={`${artist.name} profile picture`} /> {/if}
         <span class="name">{artist.name}</span>
       </button>

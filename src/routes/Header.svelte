@@ -1,5 +1,9 @@
 <script lang="ts">
-	export let user: SpotifyApi.CurrentUsersProfileResponse | undefined
+	interface Props {
+		user: SpotifyApi.CurrentUsersProfileResponse | undefined;
+	}
+
+	let { user }: Props = $props();
 	const userImage = user?.images && user.images.length > 0 ? user.images[0].url : undefined
 
 	const href = user ? "/playlists" : "/"
