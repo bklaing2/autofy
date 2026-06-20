@@ -1,29 +1,49 @@
-name: Production Tag Deployment
-
-env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+name: Deploy to GitHub Pages
 
 on:
-  push:
-    # Pattern matched against refs/tags
-    tags:        
-      - '*' # Push events to every tag not containing /
-jobs:
   release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: oven-sh/setup-bun@v1
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Install Vercel CLI
-        run: bun add --global vercel@latest
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
 
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Install Dependencies
+        run: bun install
 
-      - name: Build Project Artifacts
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build
+        env:
+          BASE_PATH: '/${{ github.event.repository.name }}'
+          PUBLIC_SPOTIFY_CLIENT_ID: ${{ secrets.PUBLIC_SPOTIFY_CLIENT_ID }}
+          PUBLIC_REDIRECT_TARGET: ${{ secrets.PUBLIC_REDIRECT_TARGET }}
+        run: bun run build
 
-      - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Upload Artifacts
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: build/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
