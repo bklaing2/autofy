@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+
 	let { data } = $props();
 
 	const BUTTON_CLASS =
@@ -23,7 +25,7 @@
 	</p>
 
 	{#if data.spotify.user}
-		<a href="/playlists" class={BUTTON_CLASS}> my&nbsp;playlists </a>
+		<a href={resolve('/playlists')} class={BUTTON_CLASS}> my&nbsp;playlists </a>
 	{:else}
 		<button onclick={data.SignIn} class={BUTTON_CLASS}>
 			connect&nbsp;your&nbsp;Spotify&nbsp;account to&nbsp;get&nbsp;started!

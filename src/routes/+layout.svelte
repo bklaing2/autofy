@@ -2,6 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import GithubLogo from 'virtual:icons/logos/github-icon';
 	import './styles.css';
+	import { resolve } from '$app/paths';
 
 	let { data, children } = $props();
 </script>
@@ -18,10 +19,10 @@
 	<header
 		class="relative grid grid-cols-[repeat(2,max-content)_1fr] justify-items-end items-center gap-8 overflow-scroll pb-8 px-8"
 	>
-		<a href="/"
-			><img src="favicon.png" alt="autofy icon" class="h-8 aspect-square rounded-full" /></a
-		>
-		<a class="autofy font-black text-[2rem]" href="/">autofy</a>
+		<a href={resolve('/')}>
+			<img src="favicon.png" alt="autofy icon" class="h-8 aspect-square rounded-full" />
+		</a>
+		<a class="autofy font-black text-[2rem]" href={resolve('/')}>autofy</a>
 
 		{#if data.spotify.user}
 			{#if data.spotify.user.image}

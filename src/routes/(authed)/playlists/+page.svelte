@@ -32,5 +32,5 @@
 		</div>
 	{/each}
 
-	<!-- <a class="playlist wireframe" href="/create-playlist">+</a> -->
+	<!-- <a class="playlist wireframe" href={resolve("/create-playlist")}>+</a> -->
 </main>
