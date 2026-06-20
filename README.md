@@ -1,6 +1,4 @@
-# [﻿﻿autofy](https://bklaing2.github.io/autofy/) - automatically keep Spotify playlists up to date
-
-Add all of an artist's songs to a Spotify playlist
+# [﻿﻿autofy](https://bklaing2.github.io/autofy/) - Add all of an artist's songs to a Spotify playlist
 
 1. Create a playlist on Spotify
 2. Include the word "autofy" in the playlist description
