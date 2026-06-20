@@ -13,15 +13,36 @@
 </svelte:head>
 
 <section class="max-w-140 mx-auto px-8">
-	<span class="w-full mb-12 text-center text-[1.2rem] text-secondary block">
-		No more manual updates!
+	<span class="w-full mb-10 text-justify text-xl text-secondary block">
+		Add all of an artist's songs to a Spotify playlist
 	</span>
 
-	<p class="mt-0 mb-16 text-justify">
-		Playlists created with <span class="autofy">autofy</span> automatically refresh as artists
-		release new music.<br /><br />
-		<span class="autofy">autofy</span> playlists can also stay up-to-date with your favorite artists,
-		adding or removing tracks whenever you follow or unfollow an artist
+	<ol class="list-decimal text-justify flex flex-col gap-2">
+		<li>Create a playlist on Spotify</li>
+		<li>Include the word "autofy" in the playlist description</li>
+		<li>
+			Add a song to the playlist, ensuring it has only one artist. Repeat for any artist you want
+			included in this playlist
+		</li>
+		<li>The Spotify playlist should now be visible on <span class="autofy">autofy</span></li>
+		<li>
+			When you click the refresh button on the bottom right of the playlist <span class="autofy"
+				>autofy</span
+			> will populate the artist(s) discography!
+		</li>
+		<li>
+			On each subsequent refresh, any songs released since the previous refresh will be added to the
+			playlist
+		</li>
+		<li>
+			If you want to add another artist to the playlist simply add a song by that artist to the
+			playlist and click the refresh button again!
+		</li>
+	</ol>
+
+	<p class="mt-10 mb-16 text-justify text-secondary">
+		There is no limit to the number of playlists you can enhance with
+		<span class="autofy">autofy</span>, so create as many as you like!
 	</p>
 
 	{#if data.spotify.user}
