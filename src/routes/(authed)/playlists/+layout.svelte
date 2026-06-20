@@ -1,7 +1,5 @@
-<script lang="ts" labg="ts">
-	import Playlists from './Playlists.svelte';
-	let { data, children } = $props();
-	let playlists = data.playlists ?? [];
+<script lang="ts">
+	let { children } = $props();
 </script>
 
 <svelte:head>
@@ -18,7 +16,4 @@
 	></script>
 </svelte:head>
 
-<Playlists {playlists}>
-	{@render children?.()}
-</Playlists>
-
+{@render children?.()}

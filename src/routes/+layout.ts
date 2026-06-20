@@ -1,9 +1,23 @@
-// import { LayoutLoad } from "./$types";
-import { GetUser } from "$lib/spotify";
+import type { LayoutLoad } from "./$types";
+import { SignIn as SpotifySignIn, SignOut as SpotifySignOut } from "$lib/spotify";
+import { spotify } from "$lib/state.svelte";
+import { goto } from "$app/navigation";
 
 export const ssr = false;
 export const prerender = true;
 
-export const load /*: LayoutLoad */ = async ({ }) => {
-  return { user: await GetUser() }
+export const load: LayoutLoad = async ({ url }) => {
+  if (!!url.searchParams.get("code")) SignIn()
+  return { spotify, SignIn, SignOut }
+}
+
+async function SignIn() {
+  spotify.user = await SpotifySignIn()
+  goto("/playlists")
+}
+
+async function SignOut() {
+  await SpotifySignOut()
+  spotify.user = null
+  goto("/")
 }
